@@ -1,25 +1,23 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState, createContext } from 'react';
+import ContadorCliques from './ContadorCliques';
+
+export const CliqueContext = createContext([0, () => {}]);
+//Valor padrão serve quando não a um provider.
 
 function App() {
+
+  const [cliques, setCliques] = useState(0);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <CliqueContext.Provider value={[cliques, setCliques]}>
+      <div className="App">
+        <ContadorCliques />
+      </div>
+    </CliqueContext.Provider>
+
   );
 }
 
 export default App;
+
+//Passa como props 'cliques' e 'setCliques para a função em ContadorCliques.js'
